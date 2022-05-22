@@ -1,0 +1,32 @@
+$color-list: (
+  blue-a: #4A90E2,
+  blue-b: #1173c8,
+  blue-c: #00408B,
+
+  danger: #dc3741,
+  warning: #f0ad4e,
+  success: #28a745,
+  
+  skin: #FFF2DC,
+  gray-a: #F2F2F2,
+  gary-b: #E1E1E1,
+  gary-c: #C8C8C8,
+  gary-d: #757575
+);
+$bg-color-list: (
+  defalut: #1091ff
+);
+
+
+@mixin color-setting ($name, $color) {
+  .bg-#{$name} {
+    background-color: $color !important;
+  }
+  .text-#{$name} {
+    color: $color !important;
+  }
+}
+
+@each $name, $color in $color-list {
+  @include color-setting($name, $color)
+}
