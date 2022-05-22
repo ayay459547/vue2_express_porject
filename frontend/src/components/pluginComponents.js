@@ -5,7 +5,7 @@ import modal from '@/components/feature/modal'
 import tableTemplate from '@/components/feature/tableTemplate'
 import filterTemplate from '@/components/feature/filterTemplate'
 
-import customButton from '@/components/form/customButton'
+import formButtom from '@/components/form/formButtom'
 
 /* fontawesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -19,7 +19,7 @@ const pluginComponents = {
     Vue.component(modal.name, modal)
     Vue.component(tableTemplate.name, tableTemplate)
     Vue.component(filterTemplate.name, filterTemplate)
-    Vue.component(customButton.name, customButton)
+    Vue.component(formButtom.name, formButtom)
 
     /* fontawesome */
     library.add(faUserSecret)

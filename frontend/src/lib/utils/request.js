@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const conApi = true
+const connectApi = true
 
 export default {
   funName: '$request',
   func (config, fakeData = null) {
     // 有給假資料回傳假資料
-    if (fakeData && !conApi) {
+    if (fakeData && !connectApi) {
       return Promise.resolve({
         data: fakeData,
         type: 'success',

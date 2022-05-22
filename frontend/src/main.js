@@ -9,6 +9,10 @@ import pluginLib from "@/lib/pluginLib"
 
 Vue.config.productionTip = false
 
+/**
+ * vue plugin
+ * https://medium.com/swlh/how-to-create-a-vue-plugin-36d5987d4768
+ */
 Vue.use(pluginComponents)
 Vue.use(pluginLib)
 

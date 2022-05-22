@@ -1,7 +1,12 @@
+/**
+ * 讓 object 有類似 array 的方法
+ * https://vanillajstoolkit.com/polyfills/objectforeach/
+ */
+
 const objectFunc = {
   $forEach: {
     inject: true,
-    fun (callback, thisArg) {
+    func (callback, thisArg) {
       thisArg = thisArg || window
 
       for (let key in this) {
@@ -15,7 +20,7 @@ const objectFunc = {
   },
   $map: {
     inject: true,
-    fun (callback, thisArg) {
+    func (callback, thisArg) {
       thisArg = thisArg || window
 
       let resObj = new this.constructor()
@@ -29,7 +34,7 @@ const objectFunc = {
   },
   $filter: {
     inject: true,
-    fun (callback, thisArg) {
+    func (callback, thisArg) {
       thisArg = thisArg || window
 
       let resObj = new this.constructor()
@@ -43,7 +48,7 @@ const objectFunc = {
   },
   $some: {
     inject: true,
-    fun (callback, thisArg) {
+    func (callback, thisArg) {
       thisArg = thisArg || window
       for (let key in this) {
         if (this.hasOwnProperty(key) && callback.call(thisArg, this[key], key, this)) {
@@ -55,7 +60,7 @@ const objectFunc = {
   },
   $every: {
     inject: true,
-    fun (callback, thisArg) {
+    func (callback, thisArg) {
       thisArg = thisArg || window
       for (let key in this) {
         if (this.hasOwnProperty(key) && !callback.call(thisArg, this[key], key, this)) {
@@ -67,7 +72,7 @@ const objectFunc = {
   },
   $reduce: {
     inject: true,
-    fun (callback, temp, thisArg) {
+    func (callback, temp, thisArg) {
       thisArg = thisArg || window
       for (let key in this) {
         if (this.hasOwnProperty(key)) {

@@ -1,7 +1,7 @@
 const ArrayPolyfill = {
   forEach: {
     inject: false,
-    fun (callback, thisArg) {
+    func (callback, thisArg) {
       Array.prototype.forEach = function (callback /*, thisArg*/) {
         var T, k
 
@@ -61,7 +61,7 @@ const ArrayPolyfill = {
   },
   map: {
     inject: false,
-    fun (callback, thisArg) {
+    func (callback, thisArg) {
       Array.prototype.map = function (callback /*, thisArg*/) {
         var T, A, k
 
