@@ -2,8 +2,8 @@
   <div class="content-wrapper">
     <div class="content-top"></div>
     <div class="content-container c-pa-lg">
-      <!-- <router-view/> -->
-      {{ userName + '123'}}
+      {{ 'hi' + userName}}
+      <router-view/>
     </div>
   </div>
 </template>
@@ -12,8 +12,7 @@
 export default {
   name: 'v-content',
   data () {
-    return {
-    }
+    return {}
   },
   computed: {
     userName () {

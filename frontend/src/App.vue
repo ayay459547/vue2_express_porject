@@ -1,7 +1,7 @@
 <template>
   <div>
     <login v-if="!isLogin"/>
-    <v-layout v-if="initFinally"/>
+    <v-layout v-if="initFinally && isLogin"/>
     <loading-compontent ref="loading"/>
   </div>
 </template>
@@ -9,8 +9,8 @@
 <script>
 import router from '@/router'
 import Layout from '@/components/layout'
-import loadingCompontent from '@/components/feature/loading'
 import Login from '@/views/Login'
+import loadingCompontent from '@/components/feature/loading'
 
 export default {
   components: {
@@ -29,9 +29,6 @@ export default {
     },
     menuList () {
       return this.$store.state.menu.menuList
-    },
-    routerList () {
-      return this.$store.getters['menu/routerList']
     }
   },
   methods: {
@@ -50,8 +47,8 @@ export default {
         })
 
         // 預設先都到首頁
-        this.$store.commit('menu/setCurrentMenu', this.menuList[0])
-        this.$router.push({ name: 'Setting' })
+        // this.$store.commit('menu/setCurrentMenu', this.menuList[0])
+        // this.$router.push({ name: 'Setting' })
       } catch (e) {
         this.swal({
           icon: 'error',
@@ -87,37 +84,25 @@ export default {
       }
     },
     settingRouter () {
-      this.routerList.forEach(routerItem => {
+      let routerList = this.menuList.map(menuItem => {
+        return {
+          path: `/${menuItem.router}`,
+          name: menuItem.name,
+          component: () => import(`@/menu/${menuItem.router}/${menuItem.router}`)
+        }
+      })
+
+      routerList.forEach(routerItem => {
         router.addRoute(routerItem)
       })
     }
   },
   created () {
-    // this.init()
+    this.init()
   }
 }
 </script>
 
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>

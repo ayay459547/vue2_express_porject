@@ -9,7 +9,8 @@ export const user = {
   getters: {
     isLogin (state) {
       if (state.id > 0 && state.name !== '') {
-        return true
+        // return true
+        return false
       } else {
         return false
       }

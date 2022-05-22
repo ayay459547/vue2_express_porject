@@ -6,10 +6,11 @@ import tableTemplate from '@/components/feature/tableTemplate'
 import filterTemplate from '@/components/feature/filterTemplate'
 
 import formButtom from '@/components/form/formButtom'
+import formInput from '@/components/form/formInput'
 
 /* fontawesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const pluginComponents = {
@@ -20,9 +21,10 @@ const pluginComponents = {
     Vue.component(tableTemplate.name, tableTemplate)
     Vue.component(filterTemplate.name, filterTemplate)
     Vue.component(formButtom.name, formButtom)
+    Vue.component(formInput.name, formInput)
 
     /* fontawesome */
-    library.add(faUserSecret)
+    library.add(fas)
     Vue.component('font-awesome-icon', FontAwesomeIcon)
   },
 }

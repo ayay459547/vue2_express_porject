@@ -7,7 +7,7 @@
         class="menu-item"
         @click="changeRouter(menuItem)"
       >
-        <font-awesome-icon icon="fa-solid fa-user-secret" />
+        <font-awesome-icon :icon="menuItem.icon"/>
         <div class="item-name">
           {{ menuItem.name }}
         </div>
