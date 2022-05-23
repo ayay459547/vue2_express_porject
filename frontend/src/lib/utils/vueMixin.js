@@ -34,6 +34,8 @@ const mixin = {
           if (!isNaN(parseInt(value))) return false
           return true
       }
+
+      return false
     },
     /**
      * alart

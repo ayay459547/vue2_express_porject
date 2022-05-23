@@ -152,7 +152,7 @@ export default {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .menu {
     &-container {
       top: 90px;

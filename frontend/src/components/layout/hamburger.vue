@@ -125,7 +125,7 @@ $revise-length: 14px; // 修正bar原始距離
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .hamburger {
     &-wrapper {
       top: 30px;

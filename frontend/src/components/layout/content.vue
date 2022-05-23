@@ -66,7 +66,7 @@ export default {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .content {
     &-container {
       height: calc(100% - 55px);

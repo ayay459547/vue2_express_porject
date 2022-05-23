@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+// 常用中文字
+p, div, label, li, span {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Smooch&display=swap');
+// 造型英文字
+.english {
+  font-family: 'Smooch', cursive;
+}

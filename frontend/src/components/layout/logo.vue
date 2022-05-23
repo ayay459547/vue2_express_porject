@@ -36,7 +36,7 @@ export default {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .logo {
     top: 20px;
     left: 30px;
