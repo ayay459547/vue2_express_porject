@@ -4,7 +4,6 @@ const app = express()
 function initApp (initList) {
   initList.forEach(callback => {
     callback(app)
-    // callback.call(this, app)
   })
 }
 
@@ -23,7 +22,7 @@ initApp([
 
 const port = 8090
 
-const db = {}
+const db = require('./lib/db')
 
 const sendData = {
   data: 'empty',
@@ -31,7 +30,13 @@ const sendData = {
   msg: '成功'
 }
 
-require('./routes')(app, db, sendData)
+const errorData = {
+  data: 'empty',
+  status: 'error',
+  msg: '失敗'
+}
+
+require('./routes')(app, db, sendData, errorData)
 
 app.listen(port, () => {
    console.log( 'success run server on ' + port)

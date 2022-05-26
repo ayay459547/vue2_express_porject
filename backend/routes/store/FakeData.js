@@ -8,7 +8,7 @@ const menuData = [
     id: 1,
     icon: 'fa-solid fa-file-signature',
     name: '基本資料',
-    router: 'Setting'
+    router: 'Information'
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const menuData = [
   {
     id: 4,
     icon: 'fa-solid fa-bars-progress',
-    name: '系統管理',
+    name: '功能管理',
     router: 'System'
   }
 ]

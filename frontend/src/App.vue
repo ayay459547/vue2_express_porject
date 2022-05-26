@@ -1,6 +1,6 @@
 <template>
   <div>
-    <login v-if="!isLogin"/>
+    <login v-if="!isLogin" @init="init"/>
     <v-layout v-if="initFinally && isLogin"/>
     <loading-compontent ref="loading"/>
   </div>
@@ -36,13 +36,11 @@ export default {
       try {
         // 設定使用者和路由
         await Promise.all([
-          this.settingUser()
-        ])
-        await Promise.all([
+          this.settingUser(),
           this.settingMenu()
         ])
         // 設定懶加載路由
-        await setTimeout(() => {
+        setTimeout(() => {
           this.settingRouter()
         })
 

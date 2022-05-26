@@ -19,6 +19,7 @@ export const menu = {
   },
   mutations: {
     setData (state, menuList) {
+      state.menuList.splice(0)
       this.$deepClone(state.menuList, menuList)
     },
     setCurrentMenu (state, menuData) {

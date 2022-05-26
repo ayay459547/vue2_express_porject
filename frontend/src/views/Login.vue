@@ -44,7 +44,7 @@
         </div>
 
         <div class="login-sign">
-          <span class="english">XieZhenZhan</span>
+          <span class="sign">XieZhenZhan</span>
         </div>
       </form>
     </div>
@@ -62,8 +62,46 @@ export default {
     }
   },
   methods: {
-    submit () {
-      console.log(this.postData)
+    login () {
+      return this.$request({
+        url: '/login',
+        method: 'post',
+        data: this.postData
+      }, {}).then((resData) => {
+        if (resData.status !== 'success') {
+          throw(e)
+        }
+
+        return resData.data
+      })
+    },
+    async submit () {
+      try {
+        let userId =  await this.login()
+
+        if (userId > 0) {
+          this.$emit('init')
+
+          this.swal({
+            icon: 'success',
+            title: '登入成功!',
+            text: '歡迎使用'
+          })
+        } else {
+          this.swal({
+            icon: 'error',
+            title: '帳號或密碼錯誤!',
+            text: '請重新輸入'
+          })
+        }
+
+      } catch (e) {
+        this.swal({
+          icon: 'error',
+          title: '系統錯誤!',
+          text: '請聯絡服務人員'
+        })
+      }
     }
   }
 }
@@ -75,7 +113,7 @@ export default {
 .login {
   &-fixed {
     position: fixed;
-    z-index: 9999;
+    z-index: 9;
     left: 0;
     top: 0;
     width: 100vw;

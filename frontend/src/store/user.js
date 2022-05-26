@@ -9,8 +9,7 @@ export const user = {
   getters: {
     isLogin (state) {
       if (state.id > 0 && state.name !== '') {
-        // return true
-        return false
+        return true
       } else {
         return false
       }
@@ -18,17 +17,18 @@ export const user = {
   },
   mutations: {
     setData (state, { id = null, name = null }) {
-      if (id) {
-        state.id = id
-        state.name = name
-      }
+      state.id = id
+      state.name = name
     }
   },
   actions: {
     getData (context) {
       return this.$request({
         url: '/store/user',
-        method: 'post'
+        method: 'post',
+        data: {
+          userId: 2
+        }
       }, userData).then((resData) => {
         return resData
       })

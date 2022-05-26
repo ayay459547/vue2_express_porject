@@ -19,18 +19,18 @@ const mixin = {
       if ([null, undefined].includes(value)) return true
 
       switch (type) {
-        case 'Array':
-        case 'String':
+        case 'array':
+        case 'string':
           if (value.length > 0) return false
           return true
-        case 'Object':
+        case 'object':
           let hasOwnProperty = Object.hasOwnProperty
 
           for (let key in value) {
             if (hasOwnProperty.call(value, key)) return false
           }
           return true
-        case 'Number':
+        case 'number':
           if (!isNaN(parseInt(value))) return false
           return true
       }

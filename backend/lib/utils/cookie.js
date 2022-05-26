@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 /**
  * 設置 cookie
  * @param {*} res 
@@ -13,7 +15,11 @@
  *  httpOnly(防XSS 無法通過js腳本 applet等取得cookie 訊息)
  *  signed(true時 為簽名cookie 需用res.signedCookies使用 被竄改時會被服務器拒絕 且重置cookie)
  */
-function setCookie (res, sKey, sValue, options) {
+function setCookie (res, sKey, sValue, options = {
+  httpOnly: true,
+  signed: true,
+  expires: moment().add(1, 'days')
+}) {
   res.cookie(sKey, sValue, options)
 }
 
@@ -24,7 +30,7 @@ function setCookie (res, sKey, sValue, options) {
  * @param {Boolean} signed
  * @returns 
  */
-function getCookie (req, sKey, signed = false) {
+function getCookie (req, sKey, signed = true) {
   if (signed) {
     return req.signedCookies[sKey]
   } else {

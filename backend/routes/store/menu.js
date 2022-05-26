@@ -1,10 +1,10 @@
-const { menuData } = require('./FakeData')
+// const { menuData } = require('./FakeData')
 
 module.exports = function (app, db, sendData) {
   app.post('/store/menu', (req, res) => {
     console.log(req.body)
     
-    sendData.data = menuData
+    sendData.data = []
     res.send(sendData)
   })
 }
