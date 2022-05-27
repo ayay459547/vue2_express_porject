@@ -7,11 +7,8 @@ function initApp (initList) {
   })
 }
 
-// 解析body資料
 const initBodyParser = require('./lib/init/bodyParser')
-// 跨域設定
 const initCorsOptions = require('./lib/init/corsOptions')
-// 使用 cookie
 const initCookieParser = require('./lib/init/cookieParser')
 
 initApp([
@@ -20,7 +17,7 @@ initApp([
   initCookieParser,
 ])
 
-const port = 8090
+const port = 5050
 
 const db = require('./lib/db')
 

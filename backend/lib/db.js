@@ -13,13 +13,13 @@ const dbSetting = {
  * @param {String} sql 
  * @returns {Object}
  */
-const queryFun = function(sql) {
+const queryFun = function (sql) {
   const con = mysql.createConnection(dbSetting)
 
   return new Promise((resolve, reject) => {
     con.query(sql, (err, result) => {
       if (err) {
-        reject('抓取資料失敗')
+        reject('error')
         // throw(err)
       }
       resolve(result)

@@ -1,36 +1,20 @@
 // const { userData } = require('./FakeData')
+const { getCookie } = require('../../lib/utils/cookie')
 
 module.exports = function (app, db, sendData, errorData) {
-  const { queryFun } = db
-
-  app.post('/store/user', async (req, res) => {
-    const postData = req.body
-
-    const sql = `
-      SELECT
-        user_id,
-        user_name,
-        user_account,
-        user_password
-      FROM user
-      WHERE user_id = ${postData.userId}
-    ;`
-
-    let sqlData = null
-    let resData = null
+  app.get('/store/user', async (req, res) => {
+    let statusData = null
     try {
-      sqlData = await queryFun(sql)
+      statusData = getCookie(req, 'statusData')
 
     } catch (e) {
       console.log(e)
       res.send(errorData)
 
     } finally {
-      resData = sqlData[0]
-
-      sendData.data = {
-        id: null,
-        name: null
+      if (![null, undefined].includes(statusData)) {
+        let { userData } = JSON.parse(statusData)
+        sendData.data = userData
       }
       res.send(sendData)
     }

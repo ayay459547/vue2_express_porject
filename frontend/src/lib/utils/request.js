@@ -15,10 +15,13 @@ export default {
 
     // 1.創建 axios 實例
     const instance = axios.create({
-      baseURL: 'http://localhost:8090/',
+      baseURL: 'http://localhost:5050/',
       // baseURL: 'https://jsonplaceholder.typicode.com',
       timeout: 5000,
-      headers: { 'Content-Type': 'application/json' }
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
 
     // 2.axios 的攔截器

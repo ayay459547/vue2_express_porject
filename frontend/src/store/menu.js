@@ -30,7 +30,7 @@ export const menu = {
     getData (context) {
       return this.$request({
         url: '/store/menu',
-        method: 'post'
+        method: 'get'
       }, menuData).then((resData) => {
         return resData
       })

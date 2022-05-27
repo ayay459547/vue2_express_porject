@@ -1,11 +1,9 @@
 const { setBase64, setSHA256 } = require('../../lib/utils/cryto')
-const setStatus = require('./status')
-
 
 module.exports = function (app, db, sendData) {
   const { queryFun } = db
 
-  app.post('/login', async (req, res) => {
+  app.post('/views/login', async (req, res) => {
     const postData = req.body
 
     const sql = `
@@ -34,9 +32,8 @@ module.exports = function (app, db, sendData) {
       let userId = resData?.user_id ?? 0
 
       sendData.data = userId
-      res.send(sendData)
 
-      setStatus(res, queryFun, userId)
+      res.send(sendData)
     }
   })
 }

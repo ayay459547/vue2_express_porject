@@ -64,7 +64,7 @@ export default {
   methods: {
     login () {
       return this.$request({
-        url: '/login',
+        url: '/views/login',
         method: 'post',
         data: this.postData
       }, {}).then((resData) => {
@@ -75,11 +75,26 @@ export default {
         return resData.data
       })
     },
+    status (userId) {
+      return this.$request({
+        url: '/views/status',
+        method: 'post',
+        data: {
+          userId
+        }
+      }, {}).then((resData) => {
+        if (resData.status !== 'success') {
+          throw(e)
+        }
+      })
+    },
     async submit () {
       try {
         let userId =  await this.login()
 
         if (userId > 0) {
+          await this.status(userId)
+
           this.$emit('init')
 
           this.swal({

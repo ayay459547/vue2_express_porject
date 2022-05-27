@@ -25,10 +25,7 @@ export const user = {
     getData (context) {
       return this.$request({
         url: '/store/user',
-        method: 'post',
-        data: {
-          userId: 2
-        }
+        method: 'get'
       }, userData).then((resData) => {
         return resData
       })
