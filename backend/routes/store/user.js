@@ -15,7 +15,13 @@ module.exports = function (app, db, sendData, errorData) {
       if (![null, undefined].includes(statusData)) {
         let { userData } = JSON.parse(statusData)
         sendData.data = userData
+      } else {
+        sendData.data = {
+          id: null,
+          name: null
+        }
       }
+      
       res.send(sendData)
     }
   })

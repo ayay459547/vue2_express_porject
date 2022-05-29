@@ -2,7 +2,9 @@ module.exports = {
   devServer: {
     port: 5000,
     allowedHosts: [
-      'http://localhost:5050'
+      'http://localhost:5050',
+      'http://192.168.1.9:5050',
+      'http://192.168.1.147',
     ],
     // https: {
     //   ca: './path/to/server.pem',
@@ -14,7 +16,7 @@ module.exports = {
     // },
     proxy: {
       '/menu': {
-        target: 'http://localhost:5000',
+        target: 'http://192.168.1.9:5000',
         ws: true,
         changeOrigin: true,
         pathRewrite: {
@@ -22,7 +24,7 @@ module.exports = {
         }
       },
       '/store': {
-        target: 'http://localhost:5000',
+        target: 'http://192.168.1.9:5000',
         ws: true,
         changeOrigin: true,
         pathRewrite: {

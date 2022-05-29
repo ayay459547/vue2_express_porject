@@ -23,7 +23,7 @@ function setCookie (res, sKey, sValue, options = {
   secrue: false,
   httpOnly: true,
   signed: true,
-  expires: new Date(Date.now() + 8 * 3600000)
+  expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
   // expires: moment.utc(moment().add(1, 'days').format('YYYY-MM-DD 00:00:00'))
 }) {
   res.cookie(sKey, sValue, options)

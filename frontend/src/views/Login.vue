@@ -95,13 +95,12 @@ export default {
         if (userId > 0) {
           await this.status(userId)
 
+          // this.swal({
+          //   icon: 'success',
+          //   title: '登入成功!',
+          //   text: '歡迎使用'
+          // })
           this.$emit('init')
-
-          this.swal({
-            icon: 'success',
-            title: '登入成功!',
-            text: '歡迎使用'
-          })
         } else {
           this.swal({
             icon: 'error',

@@ -1,4 +1,5 @@
 const login = require('./views/login')
+const logout = require('./views/logout')
 const status = require('./views/status')
 
 const user = require('./store/user')
@@ -13,6 +14,7 @@ const isLogin = true
 
 module.exports = function (app, db, sendData, errorData) {
   login(app, db, sendData, errorData)
+  logout(app, db, sendData, errorData)
   status(app, db, sendData, errorData)
 
   app.use(function (req, res, next) {

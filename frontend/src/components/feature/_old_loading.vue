@@ -2,13 +2,11 @@
   <transition name="fade">
     <div v-if="isShow" class="loading-wrapper">
       <div class="loading-container">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+        <div class="arc"></div>
+        <div class="arc"></div>
+        <div class="arc"></div>
+        <p class="word">{{ text }}</p>
       </div>
-      <p class="loading-text">{{ text }}</p>
     </div>
   </transition>
 </template>
@@ -17,9 +15,8 @@
 export default {
   data () {
     return {
-      defaultText: 'loading ...',
       isShow: false,
-      text: '',
+      text: 'loading',
       isError: false,
       openTime: null,
       minTime: 300
@@ -57,7 +54,7 @@ export default {
       if (!this.isEmpty(msg, 'string')) {
         this.text = msg
       } else {
-        this.text = this.defaultText
+        this.text = 'loading'
       }
 
       switch (type) {
@@ -88,7 +85,7 @@ export default {
 
 <style lang="scss" scoped>
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .3s;
+  transition: opacity .5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
@@ -99,65 +96,86 @@ export default {
     position: fixed;
     z-index: 99999;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
     left: 0;
     top: 0;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     min-width: 100vw;
-    background: rgba(33, 33, 33, 0.6);
+    background: rgba(0, 0, 0, 0.6);
   }
 
   &-container {
-    $colors: #7ef9ff, #89cff0, #4682b4, #0f52ba, #000080;
-    display: flex;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    .word {
+      color: #fff;
+      text-align: center;
+      transform: translateY(80px);
+      white-space: nowrap;
+    }
 
-    .dot {
-      position: relative;
-      width: 1.2em;
-      height: 1.2em;
-      margin: 0.8em;
+    .arc {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
+      border-bottom: 3px solid #fff;
 
-      &::before {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background: inherit;
-        border-radius: inherit;
-        animation: wave 1s ease-out infinite;
+      @for $i from 1 through 3 {
+        &:nth-child(#{$i}) {
+          animation: rotate#{$i} 1.15s linear infinite;
+        }
       }
 
-      @for $i from 1 through 5 {
-        &:nth-child(#{$i}) {
-          background: nth($colors, $i);
+      &:nth-child(1) {
+        animation-delay: -0.8s;
+      }
 
-          &::before {
-            animation-delay: $i * 0.2s;
-          }
-        }
+      &:nth-child(2) {
+        animation-delay: -0.4s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0s;
       }
     }
   }
+}
 
-  &-text {
-    font-size: 1.2em;
-    color: #fff;
+@keyframes rotate1 {
+  from {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0);
+  }
+
+  to {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(1turn);
   }
 }
 
-@keyframes wave {
-  50%,
-  75% {
-    transform: scale(2.5);
+@keyframes rotate2 {
+  from {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(0);
   }
 
-  80%,
-  100% {
-    opacity: 0;
+  to {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(1turn);
+  }
+}
+
+@keyframes rotate3 {
+  from {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(0);
+  }
+
+  to {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(1turn);
   }
 }
 

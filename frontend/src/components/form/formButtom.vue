@@ -6,9 +6,17 @@
     :round="round"
     @click="$emit('click')"
   >
-    <font-awesome-icon v-if="iconPosition === 'front' && !isEmpty(icon, 'String')" :icon="icon"/>
+    <font-awesome-icon 
+      v-if="iconPosition === 'front' && !isEmpty(icon, 'String')" 
+      :icon="icon"
+      class="form-icon"
+    />
     <label class="form-label">{{ label }}</label>
-    <font-awesome-icon v-if="iconPosition === 'back' && !isEmpty(icon, 'String')" :icon="icon"/>
+    <font-awesome-icon 
+      v-if="iconPosition === 'back' && !isEmpty(icon, 'String')" 
+      :icon="icon"
+      class="form-icon"
+    />
   </el-button>
 </template>
 
@@ -57,6 +65,11 @@ export default {
     padding: 4px 8px;
     font-weight: 600;
     cursor: pointer;
+    font-size: 1.2em;
+  }
+
+  &-icon {
+    font-size: 1.3em;
   }
 }
 </style>

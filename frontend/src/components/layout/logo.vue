@@ -14,13 +14,13 @@ export default {
 .logo {
   position: fixed;
   z-index: 888;
-  top: 10px;
+  top: 5px;
   left: 30px;
 
   transition: top 0.3s, left 0.3s;
   &-img {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
   }
 }
 

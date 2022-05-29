@@ -2,7 +2,7 @@
   <div class="layout-container">
     <logo/>
     <hamburger :is-open.sync="isOpen"/>
-    <v-nav :is-open.sync="isOpen"/>
+    <v-nav :is-open.sync="isOpen" @logout="$emit('logout')"/>
     <v-content/>
   </div>
 </template>

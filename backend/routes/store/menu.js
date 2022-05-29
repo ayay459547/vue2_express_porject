@@ -15,7 +15,10 @@ module.exports = function (app, db, sendData) {
       if (![null, undefined].includes(statusData)) {
         let { menuData } = JSON.parse(statusData)
         sendData.data = menuData
+      } else {
+        sendData.data = []
       }
+      
       res.send(sendData)
     }
   })

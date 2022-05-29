@@ -1,7 +1,7 @@
 <template>
   <div>
-    <login v-if="!isLogin" @init="init"/>
-    <v-layout v-if="initFinally && isLogin"/>
+    <login v-if="initFinally && !isLogin" @init="init"/>
+    <v-layout v-if="initFinally && isLogin" @logout="logout"/>
     <loading-compontent ref="loading"/>
   </div>
 </template>
@@ -32,7 +32,17 @@ export default {
     }
   },
   methods: {
+    logout () {
+      this.$request({
+        url: '/views/logout',
+        method: 'post'
+      }, null).then((resData) => {
+        this.init()
+      })
+    },
     async init () {
+      this.$bus.$emit('loading', { type: 'open' })
+
       try {
         // 設定使用者和路由
         await Promise.all([
@@ -55,6 +65,8 @@ export default {
         })
       } finally {
         this.initFinally = true
+
+        this.$bus.$emit('loading', { type: 'close' })
       }
     },
     async settingUser () {
@@ -96,7 +108,9 @@ export default {
     }
   },
   created () {
-    this.init()
+    setTimeout(() => {
+      this.init()
+    })
   }
 }
 </script>
