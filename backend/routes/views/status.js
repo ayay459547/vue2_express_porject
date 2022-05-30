@@ -41,7 +41,7 @@ async function getMenuData (res, queryFun, userId) {
       menu_icon
     FROM 
       userMenu
-    LEFT JOIN menu ON 
+    INNER JOIN menu ON 
       menu.menu_id = userMenu_menuId AND
       menu.menu_void = 0
     WHERE 
@@ -52,7 +52,7 @@ async function getMenuData (res, queryFun, userId) {
   let sqlData = null
   try {
     sqlData = await queryFun(sql)
-
+    console.log(sqlData)
   } catch (e) {
     console.log(e)
     res.send(errorData)

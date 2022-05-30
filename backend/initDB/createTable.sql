@@ -25,12 +25,12 @@ CREATE TABLE `menu`(
 );
 
 INSERT INTO 
-	`menu` (`menu_name`, `menu_router`, `menu_icon`) 
+	`menu` (`menu_name`, `menu_router`, `menu_icon`, `menu_void`) 
 VALUES 
-	('基本資料', 'Information', 'fa-solid fa-file-signature'),
-	('使用者管理', 'Users', 'fa-solid fa-user-gear'),
-	('帳號管理', 'Account', 'fa-solid fa-id-card'),
-	('功能管理', 'System', 'fa-solid fa-bars-progress');
+	('基本資料', 'Information', 'fa-solid fa-file-signature', 1),
+	('使用者管理', 'Users', 'fa-solid fa-user-gear', 0),
+	('帳號管理', 'Account', 'fa-solid fa-id-card', 1),
+	('功能管理', 'System', 'fa-solid fa-bars-progress', 0);
 
 # 使用者能使用的功能
 CREATE TABLE `userMenu`(

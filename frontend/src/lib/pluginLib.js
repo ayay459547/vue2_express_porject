@@ -12,6 +12,8 @@ import mixin from './utils/vueMixin'
 import request from './utils/request'
 import deepClone from './utils/deepClone'
 
+// fix
+
 const funList = [
   request,
   deepClone

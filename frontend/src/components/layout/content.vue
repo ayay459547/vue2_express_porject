@@ -2,7 +2,6 @@
   <div class="content-wrapper">
     <div class="content-top"></div>
     <div class="content-container c-pa-lg">
-      {{ 'hi' + userName}}
       <router-view/>
     </div>
   </div>
@@ -13,11 +12,6 @@ export default {
   name: 'v-content',
   data () {
     return {}
-  },
-  computed: {
-    userName () {
-      return this.$store.state.user.name
-    }
   }
 }
 </script>
