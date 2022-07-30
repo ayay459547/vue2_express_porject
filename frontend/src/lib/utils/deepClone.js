@@ -8,8 +8,8 @@ export default {
   funName: '$deepClone',
   /**
    * 拷貝 array 或 object
-   * @param {Object, Array} targetElement
-   * @param {Object, Array} origin
+   * @param {Object, Array} targetElement 需要被拷貝的對象
+   * @param {Object, Array} origin 拷貝來源
    * @param {Function} setFun
    * @param {Boolean} cover
    * @returns {Object} clone obj
@@ -64,5 +64,5 @@ export default {
       }
     }
     return target
-  },
+  }
 }

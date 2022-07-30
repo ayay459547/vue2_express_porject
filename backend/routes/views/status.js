@@ -74,7 +74,7 @@ async function getMenuData (res, queryFun, userId) {
 module.exports = function (app, db, sendData) {
   const { queryFun } = db
 
-  app.post('/views/status', async (req, res) => {
+  app.post('/views/setStatus', async (req, res) => {
     const postData = req.body
 
     let userId = postData.userId

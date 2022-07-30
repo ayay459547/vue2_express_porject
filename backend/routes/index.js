@@ -5,9 +5,14 @@ const status = require('./views/status')
 const user = require('./store/user')
 const menu = require('./store/menu')
 
+const users = require('./menu/users')
+
 const routerList = [
+  // store
   user,
-  menu
+  menu,
+  // menu
+  users
 ]
 
 const isLogin = true

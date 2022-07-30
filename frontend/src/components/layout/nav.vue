@@ -67,7 +67,7 @@ export default {
     right: 0px;
     // right: 50%;
     // transform: translateX(50%);
-    z-index: 777;
+    z-index: 77;
     overflow: hidden;
     transition: width 0.3s;
   }

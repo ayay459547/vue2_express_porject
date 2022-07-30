@@ -10,7 +10,7 @@
 import router from '@/router'
 import Layout from '@/components/layout'
 import Login from '@/views/Login'
-import loadingCompontent from '@/components/feature/loading'
+import loadingCompontent from '@/components/feature/Loading'
 
 export default {
   components: {
@@ -116,5 +116,4 @@ export default {
 </script>
 
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

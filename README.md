@@ -1,7 +1,7 @@
 # 專案 (vue + nodejs-express)
 https://github.com/ayay459547/Cfrontend.git
 
-## Project setup
+## 建立
 ```
 cd backend
 npm install
@@ -12,7 +12,7 @@ npm install
 cd ..
 ```
 
-### Compiles and hot-reloads for development
+### 起動專案
 ```
 cd backend
 npm run dev
@@ -21,10 +21,4 @@ cd ..
 cd frontend
 npm run serve
 cd ..
-```
-
-### Compiles and minifies for production
-```
-cd frontend
-npm run build
 ```

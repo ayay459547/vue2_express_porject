@@ -1,8 +1,8 @@
 import ElementUI from '../../node_modules/element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-import modal from '@/components/feature/modal'
-import tableTemplate from '@/components/feature/tableTemplate'
+import Modal from '@/components/feature/Modal'
+import VTable from '@/components/feature/VTable'
 
 import formButtom from '@/components/form/formButtom'
 import formInput from '@/components/form/formInput'
@@ -17,8 +17,8 @@ const pluginComponents = {
   install(Vue) {
     Vue.use(ElementUI)
 
-    Vue.component(modal.name, modal)
-    Vue.component(tableTemplate.name, tableTemplate)
+    Vue.component(Modal.name, Modal)
+    Vue.component(VTable.name, VTable)
     Vue.component(formButtom.name, formButtom)
     Vue.component(formInput.name, formInput)
 

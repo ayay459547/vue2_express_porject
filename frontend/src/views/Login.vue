@@ -20,11 +20,14 @@
         />
 
         <form-buttom
-          class="login-buttom"
           label="登入"
           size="mini"
           icon="fa-solid fa-right-to-bracket"
           round
+          :btn-style="{
+            marginTop: '32px',
+            width: '100px'
+          }"
           @click="submit"
         />
 
@@ -77,7 +80,7 @@ export default {
     },
     status (userId) {
       return this.$request({
-        url: '/views/status',
+        url: '/views/setStatus',
         method: 'post',
         data: {
           userId
@@ -172,11 +175,6 @@ export default {
   &-input {
     margin-top: 16px;
     width: 300px;
-    // height: fit-content;
-  }
-  &-buttom {
-    margin-top: 32px;
-    width: 100px;
   }
 
   &-other {

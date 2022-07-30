@@ -1,0 +1,12 @@
+$tooltip-bg-color: #3b6aa1;
+
+div[role="tooltip"].el-tooltip__popper.is-dark {
+  background-color: $tooltip-bg-color;
+}
+
+.el-tooltip__popper[x-placement^=top] .popper__arrow{
+  border-top-color: $tooltip-bg-color;
+}
+.el-tooltip__popper[x-placement^=top] .popper__arrow:after {
+  border-top-color: $tooltip-bg-color;
+}

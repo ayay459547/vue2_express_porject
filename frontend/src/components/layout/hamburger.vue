@@ -62,7 +62,7 @@ $revise-length: 14px; // 修正bar原始距離
     width: $side-length;
     height: $side-length;
     position: fixed;
-    z-index: 999;
+    z-index: 99;
     cursor: pointer;
     box-shadow: 1px 1px 6px 2px #88b3e7;
     background-color: #4c8ed9;
