@@ -1,5 +1,7 @@
-# 專案 (vue + nodejs-express)
-https://github.com/ayay459547/Cfrontend.git
+# 專案 (vue2 + nodejs-express)
+
+### 前端 vue2
+### 後端 express + mysql
 
 ## 建立
 ```
