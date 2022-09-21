@@ -7,6 +7,8 @@ import store from './store'
 import pluginComponents from "@/components/pluginComponents"
 import pluginLib from "@/lib/pluginLib"
 
+import VFixed from '@/lib/v-fixed'
+
 Vue.config.productionTip = false
 
 /**
@@ -15,6 +17,7 @@ Vue.config.productionTip = false
  */
 Vue.use(pluginComponents)
 Vue.use(pluginLib)
+Vue.use(VFixed, { router, store })
 
 require('@/assets/main.scss')
 

@@ -70,7 +70,7 @@ export default {
         url: '/views/login',
         method: 'post',
         data: this.postData
-      }, {}).then((resData) => {
+      }, 999).then((resData) => {
         if (resData.status !== 'success') {
           throw(e)
         }
@@ -94,6 +94,7 @@ export default {
     async submit () {
       try {
         let userId =  await this.login()
+        console.log(userId)
 
         if (userId > 0) {
           await this.status(userId)
@@ -115,7 +116,7 @@ export default {
       } catch (e) {
         this.swal({
           icon: 'error',
-          title: '系統錯誤!',
+          title: '系統登入錯誤!',
           text: '請聯絡服務人員'
         })
       }
