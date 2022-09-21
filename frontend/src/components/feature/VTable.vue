@@ -1,8 +1,7 @@
 <template>
-  <div class="table-container">
+  <div v-loading="loading" class="table-container">
     <template v-if="isSet(renderColumn, 'array')">
       <el-table
-        v-loading="loading"
         v-if="isShowTable"
         :data="listData"
         ref="table"
@@ -13,9 +12,9 @@
             <template v-if="slotList.includes(`header-${column.prop}`)" v-slot:header="scope">
               <slot :name="`header-${column.prop}`" v-bind="scope"></slot>
             </template>
-            <template v-if="slotList.includes(`column-${column.prop}`)"  scope="scope">
+            <template v-if="slotList.includes(`column-${column.prop}`)" v-slot:default="scope">
               <slot 
-                v-if="scope.row" 
+                v-if="scope.row"
                 :name="`column-${column.prop}`"
                 :row="scope.row"
                 :row-index="scope.$index"
@@ -66,8 +65,7 @@ export default {
     return {
       isShowTable: false,
       listData: [],
-      loading: true,
-      _self: this
+      loading: true
     }
   },
   computed: {
@@ -91,28 +89,33 @@ export default {
         }))
     }
   },
+  watch: {
+    tableData: {
+      handler: 'init',
+      deep: true,
+      immediate: false
+    }
+  },
   methods: {
     init () {
       this.$deepClone(this.listData, this.tableData)
+
+      setTimeout(() => {
+        this.isShowTable = true
+      }, 100)
+
+      setTimeout(() => {
+        this.loading = false
+      }, 500)
     },
     getBindData (scope) {
       const scopeData = {
         rowData: scope.row,
-        rowIndex: scope.$index
+        rowIndex: scope.$index,
+        scope
       }
-
       return scopeData
     }
-  },
-  created () {
-    setTimeout(() => {
-      this.init()
-      this.isShowTable = true
-    }, 500)
-
-    setTimeout(() => {
-      this.loading = false
-    }, 1000)
   }
 }
 </script>

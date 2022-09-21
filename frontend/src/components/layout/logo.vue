@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss" scoped>
 .logo {
-  position: fixed;
+  position: absolute;
   z-index: 88;
   top: 5px;
   left: 30px;

@@ -22,19 +22,18 @@
             icon="fa-solid fa-pen-to-square"
             type="warning"
             hover-label="編輯"
-            @click="openCreate"
+            @click="openCreate()"
           />
           <form-buttom
             icon="fa-solid fa-trash-can"
             type="danger"
             hover-label="刪除"
+            @click="deleteData()"
           />
         </div>
       </template>
-      <template v-slot:column-menuNameList="scope">
-        <span v-if="isSet(scope, 'Object', true)">
-          {{ logAny(777) }}
-        </span>
+      <template v-slot:column-menuNameList="{ scope }">
+        {{ logAny(scope) }}
       </template>
     </v-table>
 
@@ -120,6 +119,9 @@ export default {
     openCreate () {
       console.log(123)
       this.modal.create = true
+    },
+    deleteData (scope) {
+      console.log(scope)
     }
   },
   created () {

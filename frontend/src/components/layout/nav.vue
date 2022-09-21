@@ -61,7 +61,7 @@ export default {
 <style lang="scss" scoped>
 .menu {
   &-container {
-    position: fixed;
+    position: absolute;
     width: calc(100% - 300px);
     top: 0px;
     right: 0px;

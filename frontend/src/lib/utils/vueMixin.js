@@ -51,7 +51,11 @@ const mixin = {
      * @param {String} type
      * @returns {Boolean}
      */
-    isEmpty(value, type = '') {
+    isEmpty(value, type = '', log = false) {
+      if (log) {
+        console.log(value)
+      }
+
       if ([null, undefined].includes(value)) return true
 
       switch (type) {
@@ -86,14 +90,43 @@ const mixin = {
       })
     },
     /**
-     * 待補
      * 類似php Array_map
+     * @param {*} target 
+     * @param {*} callback 
+     * @param {*} type entries | values | keys
+     * @returns {Object}
      */
-    Object_map(object, callback, type) {
-
+    Object_map(target, callback, type) {
+      let resObj = new this.constructor()
+      
+      switch (type) {
+        case 'entries':
+          for (let key in target) {
+            if (target.hasOwnProperty(key)) {
+              resObj[key] = callback(key, target[key], target)
+            }
+          }
+          break
+        case 'values':
+          for (let key in target) {
+            if (target.hasOwnProperty(key)) {
+              resObj[key] = callback(target[key], target)
+            }
+          }
+          break
+        case 'keys':
+          for (let key in target) {
+            if (target.hasOwnProperty(key)) {
+              resObj[key] = callback(key, target)
+            }
+          }
+          break
+      }
+      
+      return resObj
     },
     /**
-     * 顯示資料
+     * 顯示資料 且不引響版面
      * @param {*} any
      * @return {*}
      */

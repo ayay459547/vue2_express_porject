@@ -51,7 +51,7 @@ export default {
   &-wrapper {
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     left: 0;
     top: 0;
@@ -59,8 +59,8 @@ export default {
 
   }
   &-container {
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
     background: #fff;
     border-radius: 6px;
     box-shadow: 3px 3px 5px 1px #999;
