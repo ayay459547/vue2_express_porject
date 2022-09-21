@@ -1,5 +1,8 @@
 # 專案 (vue2 + nodejs-express)
 
+### 前端 vue2
+### 後端 express + mysql
+
 ## 建立
 ```
 cd backend
