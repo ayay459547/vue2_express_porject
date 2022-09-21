@@ -1,11 +1,11 @@
 import ElementUI from '../../node_modules/element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-import Modal from '@/components/feature/Modal'
-import VTable from '@/components/feature/VTable'
+import VModal from '@/components/feature/VModal.vue'
+import VTable from '@/components/feature/VTable.vue'
 
-import formButtom from '@/components/form/formButtom'
-import formInput from '@/components/form/formInput'
+import FormButtom from '@/components/form/FormButtom.vue'
+import FormInput from '@/components/form/FormInput.vue'
 
 /* fontawesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -17,10 +17,10 @@ const pluginComponents = {
   install(Vue) {
     Vue.use(ElementUI)
 
-    Vue.component(Modal.name, Modal)
+    Vue.component(VModal.name, VModal)
     Vue.component(VTable.name, VTable)
-    Vue.component(formButtom.name, formButtom)
-    Vue.component(formInput.name, formInput)
+    Vue.component(FormButtom.name, FormButtom)
+    Vue.component(FormInput.name, FormInput)
 
     /* fontawesome */
     library.add(fas)

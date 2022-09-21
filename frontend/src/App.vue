@@ -10,7 +10,7 @@
 import router from '@/router'
 import Layout from '@/components/layout'
 import Login from '@/views/Login'
-import loadingCompontent from '@/components/feature/Loading'
+import loadingCompontent from '@/components/feature/VLoading'
 
 export default {
   components: {
