@@ -1,5 +1,4 @@
 # 專案 (vue2 + nodejs-express)
-https://github.com/ayay459547/Cfrontend.git
 
 ## 建立
 ```
