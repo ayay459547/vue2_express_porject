@@ -1,3 +1,5 @@
+const test = require('./test')
+
 const login = require('./views/login')
 const logout = require('./views/logout')
 const status = require('./views/status')
@@ -18,6 +20,9 @@ const routerList = [
 const isLogin = true
 
 module.exports = function (app, db, sendData, errorData) {
+  // 測試用 http://192.168.1.000:5050/test
+  test(app, db, sendData, errorData)
+
   login(app, db, sendData, errorData)
   logout(app, db, sendData, errorData)
   status(app, db, sendData, errorData)

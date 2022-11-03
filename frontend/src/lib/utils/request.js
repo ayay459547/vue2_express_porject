@@ -13,8 +13,7 @@ export default {
 
     // 1.創建 axios 實例
     const instance = axios.create({
-      baseURL: 'http://192.168.1.9:5050/',
-      // baseURL: 'https://jsonplaceholder.typicode.com',
+      baseURL: '/',
       timeout: 5000,
       withCredentials: true,
       headers: {

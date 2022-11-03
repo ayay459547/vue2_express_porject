@@ -2,11 +2,11 @@ module.exports = {
   runtimeCompiler: true,
   devServer: {
     port: 5000,
-    allowedHosts: [
-      'http://localhost:5050',
-      'http://192.168.1.9:5050',
-      'http://192.168.1.147',
-    ],
+    open: true,
+    // allowedHosts: [
+    //   'http://localhost:5000',
+    //   'http://192.168.1.108:5000',
+    // ],
     // https: {
     //   ca: './path/to/server.pem',
     //   pfx: './path/to/server.pfx',
@@ -16,22 +16,12 @@ module.exports = {
     //   requestCert: true,
     // },
     proxy: {
-      '/menu': {
-        target: 'http://192.168.1.9:5000',
-        // target: 'http://127.0.0.1:5000',
-        ws: true,
+      '/': {
+        target: 'http://localhost:5050/',
+        ws: false,
         changeOrigin: true,
         pathRewrite: {
-          '^/menu': '/menu'
-        }
-      },
-      '/store': {
-        target: 'http://192.168.1.9:5000',
-        // target: 'http://127.0.0.1:5000',
-        ws: true,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/store': '/store'
+          '^/': '/'
         }
       }
     }

@@ -40,7 +40,18 @@ export default {
         this.init()
       })
     },
+    testApi () {
+      return this.$request({
+        url: '/test',
+        method: 'get'
+      }, {}).then((resData) => {
+        return resData
+      })
+    },
     async init () {
+      const testData = await this.testApi()
+      console.log(testData)
+
       this.$bus.$emit('loading', { type: 'open' })
 
       try {
