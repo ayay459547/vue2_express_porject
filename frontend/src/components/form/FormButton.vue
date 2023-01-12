@@ -59,7 +59,7 @@
 
 <script>
 export default {
-  name: 'formButtom',
+  name: 'formButton',
   props: {
     label: {
       type: String,

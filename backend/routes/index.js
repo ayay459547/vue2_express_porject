@@ -6,6 +6,7 @@ const status = require('./views/status')
 
 const user = require('./store/user')
 const menu = require('./store/menu')
+const options = require('./store/options')
 
 const users = require('./menu/users')
 
@@ -13,6 +14,7 @@ const routerList = [
   // store
   user,
   menu,
+  options,
   // menu
   users
 ]
@@ -20,7 +22,9 @@ const routerList = [
 const isLogin = true
 
 module.exports = function (app, db, sendData, errorData) {
-  // 測試用 http://192.168.1.000:5050/test
+  // 測試用
+  // http://localhost:5050/test
+  // http://192.168.1.XXX:5050/test
   test(app, db, sendData, errorData)
 
   login(app, db, sendData, errorData)

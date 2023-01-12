@@ -19,7 +19,7 @@
           placeholder="請輸入密碼"
         />
 
-        <form-buttom
+        <form-button
           label="登入"
           size="mini"
           icon="fa-solid fa-right-to-bracket"

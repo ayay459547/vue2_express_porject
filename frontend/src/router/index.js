@@ -12,12 +12,17 @@ const routes = [
     component: Home
   },
   {
+    path: '/home',
+    name: 'Home',
+    component: Home
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login')
   },
   {
-    path: '/404',
+    path: '/:pathMatch(.*)*',
     name: 'NoPage',
     component: () => import('@/views/NoPage')
   }

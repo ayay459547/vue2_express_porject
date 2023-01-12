@@ -1,7 +1,7 @@
 <template>
   <div class="flex-column c-ga-md full-height">
     <div>
-      <form-buttom
+      <form-button
         icon="fa-solid fa-pen-to-square"
         type="primary"
         label="新增"
@@ -15,39 +15,39 @@
       :table-columns="tableColumns"
       :after-columns="afterColumns"
     >
-      <template v-slot:header-action>操作</template>
-      <template v-slot:column-action>
+      <template #header-action>操作</template>
+      <template #column-action="{ rowData }">
         <div class="flex content-evenly">
-          <form-buttom
+          <form-button
             icon="fa-solid fa-pen-to-square"
             type="warning"
             hover-label="編輯"
-            @click="openCreate()"
+            @click="openCreate(rowData)"
           />
-          <form-buttom
+          <form-button
             icon="fa-solid fa-trash-can"
             type="danger"
             hover-label="刪除"
-            @click="deleteData()"
+            @click="deleteData(rowData)"
           />
         </div>
       </template>
-      <template v-slot:column-menuNameList="{ scope }">
-        {{ logAny(scope) }}
-      </template>
     </v-table>
 
-    <Create v-if="modal.create"/>
+    <Create v-if="modal.create" @close="closeCreate"/>
+    <Update v-if="modal.update > 0" @close="closeUpdate"/>
   </div>
 </template>
 
 <script>
 import { tableData as FakeData } from './FakeData'
 import Create from './Create'
+import Update from './Update'
 
 export default {
   components: {
-    Create
+    Create,
+    Update
   },
   data () {
     return {
@@ -79,7 +79,8 @@ export default {
         }
       ],
       modal: {
-        create: false
+        create: false,
+        update: 0
       }
     }
   },
@@ -117,14 +118,24 @@ export default {
       })
     },
     openCreate () {
-      console.log(123)
       this.modal.create = true
+    },
+    closeCreate () {
+      this.modal.create = false
+    },
+    openUpdate (row) {
+      this.modal.update = row.id
+    },
+    closeUpdate () {
+      this.modal.update = 0
     },
     deleteData (scope) {
       console.log(scope)
     }
   },
-  created () {
+  async created () {
+    await this.$store.dispatch('options/init')
+
     this.init()
   }
 }

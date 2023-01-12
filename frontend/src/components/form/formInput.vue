@@ -51,7 +51,7 @@ export default {
     height: fit-content;
   }
   &-label {
-    display: inline-block;
+    display: block;
     padding: 6px 4px;
     font-weight: 600;
   }

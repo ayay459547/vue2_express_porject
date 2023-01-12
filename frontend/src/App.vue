@@ -49,8 +49,8 @@ export default {
       })
     },
     async init () {
-      const testData = await this.testApi()
-      console.log(testData)
+      // const testData = await this.testApi()
+      // console.log(testData)
 
       this.$bus.$emit('loading', { type: 'open' })
 
@@ -108,7 +108,7 @@ export default {
       let routerList = this.menuList.map(menuItem => {
         return {
           path: `/${menuItem.router}`,
-          name: menuItem.name,
+          name: `${menuItem.name}`,
           component: () => import(`@/menu/${menuItem.router}/${menuItem.router}`)
         }
       })

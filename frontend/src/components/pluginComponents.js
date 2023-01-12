@@ -4,8 +4,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VModal from '@/components/feature/VModal.vue'
 import VTable from '@/components/feature/VTable.vue'
 
-import FormButtom from '@/components/form/FormButtom.vue'
+import FormButton from '@/components/form/FormButton.vue'
 import FormInput from '@/components/form/FormInput.vue'
+import FormSelect from '@/components/form/FormSelect.vue'
 
 /* fontawesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -19,8 +20,9 @@ const pluginComponents = {
 
     Vue.component(VModal.name, VModal)
     Vue.component(VTable.name, VTable)
-    Vue.component(FormButtom.name, FormButtom)
+    Vue.component(FormButton.name, FormButton)
     Vue.component(FormInput.name, FormInput)
+    Vue.component(FormSelect.name, FormSelect)
 
     /* fontawesome */
     library.add(fas)

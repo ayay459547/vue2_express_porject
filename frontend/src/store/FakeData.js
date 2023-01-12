@@ -23,3 +23,14 @@ const menuData = [
     router: 'Account'
   }
 ]
+
+const options = [
+  {
+    value: 1,
+    label: '使用者管理'
+  },
+  {
+    value: 2,
+    label: '功能管理'
+  }
+]

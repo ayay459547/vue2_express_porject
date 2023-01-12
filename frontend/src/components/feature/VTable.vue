@@ -10,16 +10,18 @@
         height="100%">
           <el-table-column v-for="column in renderColumn" v-bind="column" :key="`${column.prop}`">
             <template v-if="slotList.includes(`header-${column.prop}`)" v-slot:header="scope">
-              <slot :name="`header-${column.prop}`" v-bind="scope"></slot>
+              <slot 
+                :name="`header-${column.prop}`" 
+                v-bind="scope"
+              ></slot>
             </template>
             <template v-if="slotList.includes(`column-${column.prop}`)" v-slot:default="scope">
-              <slot 
-                v-if="scope.row"
+              <slot
                 :name="`column-${column.prop}`"
-                :row="scope.row"
+                :row-data="scope.row"
                 :row-index="scope.$index"
-                :scope="scope"
-                v-bind="getBindData(scope)"
+                :column-key="column.prop"
+                :scope-props="scope"
               ></slot>  
             </template>
           </el-table-column>
@@ -70,7 +72,9 @@ export default {
   },
   computed: {
     slotList () {
-      return Object.keys(this.$slots)
+      // console.log(this)
+      // console.log(Object.keys(this.$slots))
+      return Object.keys(this.$scopedSlots)
     },
     renderColumn ({ tableColumns, befaultColumns, afterColumns }) {
       return []
@@ -107,14 +111,6 @@ export default {
       setTimeout(() => {
         this.loading = false
       }, 500)
-    },
-    getBindData (scope) {
-      const scopeData = {
-        rowData: scope.row,
-        rowIndex: scope.$index,
-        scope
-      }
-      return scopeData
     }
   }
 }
