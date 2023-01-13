@@ -18,16 +18,15 @@ function deepClone (targetElement, origin, setFun = Vue.set) {
           // 如果 target 是 array
           switch (toStr.call(origin[prop])) {
             case '[object Array]':
-              target[prop].push([])
+              target[prop] = []
               deepClone(target[prop], origin[prop])
               break
             case '[object Object]':
-              target[prop].push({})
+              target[prop] = {}
               deepClone(target[prop], origin[prop])
               break
             default:
-              target[prop].push(origin[prop])
-              // setFun(target, prop, origin[prop])
+              setFun(target, prop, origin[prop])
               break
           }
           break

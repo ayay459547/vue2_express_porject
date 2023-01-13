@@ -11,9 +11,11 @@
     </div>
 
     <v-table
+      ref="userTable"
       :table-data="tableData"
       :table-columns="tableColumns"
       :after-columns="afterColumns"
+      :table-key="tableKey"
     >
       <template #header-action>操作</template>
       <template #column-action="{ rowData }">
@@ -22,7 +24,7 @@
             icon="fa-solid fa-pen-to-square"
             type="warning"
             hover-label="編輯"
-            @click="openCreate(rowData)"
+            @click="openUpdate(rowData)"
           />
           <form-button
             icon="fa-solid fa-trash-can"
@@ -34,8 +36,17 @@
       </template>
     </v-table>
 
-    <Create v-if="modal.create" @close="closeCreate"/>
-    <Update v-if="modal.update > 0" @close="closeUpdate"/>
+    <Create 
+      v-if="modal.create" 
+      @close="closeCreate" 
+      @submit="submitCreate"
+    />
+    <Update 
+      v-if="modal.update > 0" 
+      :userId="modal.update"
+      @close="closeUpdate"
+      @submit="submitUpdate"
+    />
   </div>
 </template>
 
@@ -52,6 +63,7 @@ export default {
   data () {
     return {
       FakeData,
+      tableKey: 0,
       tableData: [],
       tableColumns: [
         {
@@ -90,7 +102,8 @@ export default {
 
       try {
         let { data: userData } = await this.getData()
-        
+
+        this.tableData.splice(0)
         this.$deepClone(this.tableData, userData.map(item => {
           return {
             ...item,
@@ -111,32 +124,76 @@ export default {
     },
     getData () {
       return this.$request({
-        url: '/menu/userList',
+        url: '/menu/getUserList',
         method: 'get'
       }, FakeData).then(resData => {
         return resData
       })
     },
+    // create
     openCreate () {
       this.modal.create = true
     },
     closeCreate () {
       this.modal.create = false
     },
-    openUpdate (row) {
-      this.modal.update = row.id
+    async submitCreate () {
+      this.modal.create = false
+      await this.init()
+      this.tableKey++
+    },
+    // update
+    openUpdate (rowData) {
+      this.modal.update = rowData.id
     },
     closeUpdate () {
       this.modal.update = 0
     },
-    deleteData (scope) {
-      console.log(scope)
+    async submitUpdate () {
+      this.modal.update = 0
+      await this.init()
+      this.tableKey++
+    },
+    async deleteData (rowData) {
+      const res = await this.swal({
+        icon: 'warning',
+        title: `確定刪除 ${rowData?.name ?? ''}!`,
+        text: '刪除將無法返回',
+        showCancelButton: true,
+        confirmButtonText: '確定',
+        cancelButtonText: '取消'
+      })
+      if (res?.isConfirmed ?? false) {
+        try {
+          this.$request({
+            url: '/menu/deleteUser',
+            method: 'delete',
+            data: { userId: rowData.id }
+          }, {}).then(async resData => {
+            if (resData.status === 'success') {
+              await this.init()
+              this.tableKey++
+            } else {
+              throw(resData.msg)
+            }
+          })
+        } catch (e) {
+          this.swal({
+            icon: 'error',
+            title: '刪除使用者失敗!',
+            text: '請洽詢服務人員'
+          })
+        }
+      }
     }
   },
   async created () {
-    await this.$store.dispatch('options/init')
+    await Promise.all([
+      this.$store.dispatch('options/init'),
+      this.init()
+    ])
 
-    this.init()
+    this.tableKey++
   }
 }
 </script>

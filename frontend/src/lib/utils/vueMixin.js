@@ -58,22 +58,18 @@ const mixin = {
 
       if ([null, undefined].includes(value)) return true
 
-      switch (type) {
+      switch (type.toLowerCase()) {
         case 'array':
-        case 'Array':
         case 'string':
-        case 'String':
           if (value.length > 0) return false
           return true
         case 'object':
-        case 'Object':
           const hasOwnProperty = Object.hasOwnProperty
           for (let key in value) {
             if (hasOwnProperty.call(value, key)) return false
           }
           return true
         case 'number':
-        case 'Number':
           if (!isNaN(parseInt(value))) return false
           return true
       }
@@ -85,7 +81,7 @@ const mixin = {
      * @param {Object} options
      */
     swal(options) {
-      Swal.fire({
+      return Swal.fire({
         ...options,
       })
     },

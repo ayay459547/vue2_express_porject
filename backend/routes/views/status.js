@@ -61,7 +61,8 @@ async function getMenuData (res, queryFun, userId) {
     let menuData = sqlData.map(data => {
       return {
         id: data.menu_id,
-        name: data.menu_name,
+        label: data.menu_name,
+        name: `${data.menu_router}`.toLowerCase(),
         router: data.menu_router,
         icon: data.menu_icon
       }

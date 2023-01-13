@@ -22,7 +22,7 @@ export default {
     }
   },
   computed: {
-    userName () {
+    name () {
       return this.$store.state.user.name
     }
   },

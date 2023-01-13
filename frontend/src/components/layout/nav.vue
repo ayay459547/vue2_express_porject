@@ -1,18 +1,20 @@
 <template>
   <div class="menu-container" :class="isOpen ? 'open' : 'close'">
-    <ul v-if="!isEmpty(menuList, 'array')" class="menu-list">
-      <li
-        v-for="menuItem in menuList" 
-        :key="menuItem.id" 
-        class="menu-item"
-        @click="changeRouter(menuItem)"
-      >
-        <font-awesome-icon :icon="menuItem.icon"/>
-        <div class="item-name">
-          {{ menuItem.name }}
-        </div>
-      </li>
-
+    <ul class="menu-list">
+      <template v-if="!isEmpty(menuList, 'array')">
+        <li
+          v-for="menuItem in menuList" 
+          :key="menuItem.id" 
+          class="menu-item"
+          @click="changeRouter(menuItem)"
+        >
+          <font-awesome-icon :icon="menuItem.icon"/>
+          <div class="item-name">
+            {{ menuItem.label }}
+          </div>
+        </li>
+      </template>
+      
       <li class="menu-item" @click="logout">
         <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
         <div class="item-name">登出</div>

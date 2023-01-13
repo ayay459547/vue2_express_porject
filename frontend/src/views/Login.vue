@@ -94,16 +94,15 @@ export default {
     async submit () {
       try {
         let userId =  await this.login()
-        console.log(userId)
 
         if (userId > 0) {
           await this.status(userId)
 
-          // this.swal({
-          //   icon: 'success',
-          //   title: '登入成功!',
-          //   text: '歡迎使用'
-          // })
+          this.swal({
+            icon: 'success',
+            title: '登入成功!',
+            text: '歡迎使用'
+          })
           this.$emit('init')
         } else {
           this.swal({

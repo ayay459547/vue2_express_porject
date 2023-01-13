@@ -3,11 +3,12 @@
     <template v-if="isSet(renderColumn, 'array')">
       <el-table
         v-if="isShowTable"
-        :data="listData"
         ref="table"
         class="table-el"
         style="width: 100%"
-        height="100%">
+        height="100%"
+        :data="listData"
+      >
           <el-table-column v-for="column in renderColumn" v-bind="column" :key="`${column.prop}`">
             <template v-if="slotList.includes(`header-${column.prop}`)" v-slot:header="scope">
               <slot 
@@ -34,6 +35,10 @@
 export default {
   name: 'v-table',
   props: {
+    tableKey: {
+      type: Number,
+      default: 0
+    },
     tableData: {
       type: Array,
       default () {
@@ -94,15 +99,23 @@ export default {
     }
   },
   watch: {
-    tableData: {
+    tableKey: {
       handler: 'init',
-      deep: true,
-      immediate: false
+      immediate: true
     }
+    // tableData: {
+    //   handler: 'init',
+    //   deep: false,
+    //   immediate: false
+    // }
   },
   methods: {
     init () {
+      this.listData.splice(0)
       this.$deepClone(this.listData, this.tableData)
+
+      this.isShowTable = false
+      this.loading = true
 
       setTimeout(() => {
         this.isShowTable = true
@@ -111,6 +124,8 @@ export default {
       setTimeout(() => {
         this.loading = false
       }, 500)
+
+      this.$forceUpdate()
     }
   }
 }

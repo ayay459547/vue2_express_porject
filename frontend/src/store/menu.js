@@ -11,7 +11,8 @@ export const menu = {
       return state.menuList.map(menuItem => {
         return {
           path: `/${menuItem.router}`,
-          name: menuItem.name,
+          name: `/${menuItem.name}`,
+          label: `/${menuItem.label}`,
           component: () => import(`@/menu/${menuItem.router}/${menuItem.router}`)
         }
       })

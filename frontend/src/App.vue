@@ -29,6 +29,9 @@ export default {
     },
     menuList () {
       return this.$store.state.menu.menuList
+    },
+    routerList () {
+      return router.getRoutes()
     }
   },
   methods: {
@@ -122,6 +125,8 @@ export default {
     setTimeout(() => {
       this.init()
     })
+
+    console.log(router)
   }
 }
 </script>

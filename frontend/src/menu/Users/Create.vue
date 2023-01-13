@@ -6,7 +6,7 @@
   >
     <div>
       <form-input
-        v-model="postData.userName"
+        v-model="postData.name"
         label="使用者名稱"
         placeholder="請輸入名稱"
       />
@@ -22,7 +22,7 @@
         placeholder="請輸入密碼"
       />
       <form-select
-        v-model="postData.menu"
+        v-model="postData.menuList"
         type="password"
         label="功能"
         placeholder="請選擇功能"
@@ -39,10 +39,10 @@ export default {
   data () {
     return {
       postData: {
-        userName: '',
+        name: '',
         account: '',
         password: '',
-        menu: []
+        menuList: []
       }
     }
   },
@@ -53,17 +53,29 @@ export default {
   },
   methods: {
     submit () {
-      this.$request({
-        url: '/menu/users',
-        method: 'post',
-        data: this.postData
-      }, {}).then(resData => {
-        if (resData.state === 'success') {
-          this.$emit('close')
-        } else {
-          console.log('error')
-        }
-      })
+      this.$bus.$emit('upload', { type: 'open' })
+
+      try {
+        this.$request({
+          url: '/menu/createUser',
+          method: 'post',
+          data: this.postData
+        }, {}).then(resData => {
+          if (resData.status === 'success') {
+            this.$emit('submit')
+          } else {
+            throw(resData.msg)
+          }
+        })
+      } catch (e) {
+        this.swal({
+          icon: 'error',
+          title: '獲取個人資料失敗!',
+          text: '請洽詢服務人員'
+        })
+      } finally {
+        this.$bus.$emit('upload', { type: 'close' })
+      }
     },
     close () {
       this.$emit('close')
