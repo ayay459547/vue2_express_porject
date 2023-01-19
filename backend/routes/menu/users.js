@@ -1,6 +1,11 @@
 const { setBase64, setSHA256, getBase64 } = require('../../lib/utils/cryto')
 // 取得使用者列表
-async function getUserList (queryFun, res, errorData) {
+async function getUserList (queryFun, res, errorData, {
+  pageSize,
+  currentPage,
+  filter
+}) {
+  const from = (pageSize * (currentPage - 1) )
   const sql = `
     SELECT
       user_id,
@@ -9,15 +14,17 @@ async function getUserList (queryFun, res, errorData) {
       menu_id,
       menu_name
     FROM
-      user
-      LEFT JOIN usermenu ON
-        usermenu.userMenu_userId = user.user_id AND
-        usermenu.userMenu_void = 0
-      LEFT JOIN menu ON 
-        menu.menu_id = usermenu.userMenu_menuId AND
-        menu.menu_void = 0
-    WHERE
-      user_void = 0
+      (
+        SELECT * FROM user
+        WHERE user_void = 0
+        LIMIT ${from}, ${pageSize}
+      ) AS temp_user
+    LEFT JOIN usermenu ON
+      usermenu.userMenu_userId = temp_user.user_id AND
+      usermenu.userMenu_void = 0
+    LEFT JOIN menu ON 
+      menu.menu_id = usermenu.userMenu_menuId AND
+      menu.menu_void = 0
   `
 
   let sqlData = []
@@ -50,6 +57,28 @@ async function getUserList (queryFun, res, errorData) {
     })
 
     return Object.values(resData)
+  }
+}
+// 取的使用者數量
+async function getUserCount (queryFun, res, errorData, filter) {
+  const sql = `
+    SELECT 
+      COUNT(1)
+    FROM 
+      user
+    WHERE user_void = 0
+  `
+  let sqlData = null
+  try {
+    sqlData = await queryFun(sql)
+
+  } catch (e) {
+    console.log(e)
+    res.send(errorData)
+
+  } finally {
+    const resData = sqlData[0]['COUNT(1)']
+    return resData
   }
 }
 // 取得單一使用者
@@ -278,8 +307,29 @@ async function updateUserMenu (queryFun, res, errorData, {
 module.exports = function (app, db, sendData, errorData) {
   const { queryFun } = db
 
-  app.get('/menu/getUserList', async (req, res) => {
-    const resData = await getUserList(queryFun, res, errorData)
+  app.post('/menu/getUserList', async (req, res) => {
+    const postData = req.body
+    const { 
+      pageSize = 10,
+      currentPage = 1,
+      filter = {}
+    } = postData
+    
+    const resData = await getUserList(queryFun, res, errorData, {
+      pageSize,
+      currentPage,
+      filter
+    })
+
+    sendData.data = resData
+    res.send(sendData)
+  })
+
+  app.post('/menu/getUserCount', async (req, res) => {
+    const postData = req.body
+    const { filter = {} } = postData
+    
+    const resData = await getUserCount(queryFun, res, errorData, filter)
 
     sendData.data = resData
     res.send(sendData)

@@ -12,10 +12,13 @@
 
     <v-table
       ref="userTable"
-      :table-data="tableData"
+      :table-key="tableKey"
       :table-columns="tableColumns"
       :after-columns="afterColumns"
-      :table-key="tableKey"
+      :table-data="tableData"
+      :table-data-count="tableDataCount"
+      :pageSize="pageSize"
+      @change-page="changePage"
     >
       <template #header-action>操作</template>
       <template #column-action="{ rowData }">
@@ -64,7 +67,9 @@ export default {
     return {
       FakeData,
       tableKey: 0,
+      pageSize: 3,
       tableData: [],
+      tableDataCount: 50,
       tableColumns: [
         {
           prop: 'name',
@@ -93,15 +98,19 @@ export default {
       modal: {
         create: false,
         update: 0
-      }
+      },
+      filterData: {}
     }
   },
   methods: {
-    async init () {
+    async init (currentPage = 1) {
       this.$bus.$emit('loading', { type: 'open' })
 
       try {
-        let { data: userData } = await this.getData()
+        let [{ data: userData }, { data: userCount }] = await Promise.all([
+          this.getData(currentPage),
+          this.getCount()
+        ])
 
         this.tableData.splice(0)
         this.$deepClone(this.tableData, userData.map(item => {
@@ -110,6 +119,8 @@ export default {
             menuNameList: item.menuList.map(menuItem => menuItem.name).join(' , ')
           }
         }))
+
+        this.tableDataCount = userCount
       } catch (e) {
         console.log(e)
 
@@ -122,11 +133,28 @@ export default {
         this.$bus.$emit('loading', { type: 'close' })
       }
     },
-    getData () {
+    // 只有初始化會用到
+    getData (currentPage) {
       return this.$request({
         url: '/menu/getUserList',
-        method: 'get'
+        method: 'post',
+        data: {
+          pageSize: this.pageSize,
+          currentPage,
+          filter: this.filterData
+        }
       }, FakeData).then(resData => {
+        return resData
+      })
+    },
+    getCount () {
+      return this.$request({
+        url: '/menu/getUserCount',
+        method: 'post',
+        data: {
+          filter: this.filterData
+        }
+      }, {}).then(resData => {
         return resData
       })
     },
@@ -185,6 +213,10 @@ export default {
           })
         }
       }
+    },
+    async changePage (currentPage) {
+      await this.init(currentPage)
+      this.tableKey++
     }
   },
   async created () {
